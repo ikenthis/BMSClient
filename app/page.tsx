@@ -33,42 +33,49 @@ const HomePage = () => {
 
   return (
     <div className="h-[12vh] shadow-md">
-      <div className="w-[80%] mx-auto flex items-center justify-between h-full">
-        <h1 className="text-3xl font-bold">IPCE</h1>
-        {!user && (
-          <Link href="/auth/signup"> 
-            <Button size="lg" className="cursor-pointer hover:bg-blue-700 transition-colors">
-              Registrate
-            </Button>
-          </Link>
-        )}
+  <div className="w-[80%] mx-auto flex items-center justify-between h-full">
+    <h1 className="text-3xl font-bold">IPCE</h1>
+    {!user && (
+      <div className="flex items-center gap-3">
+        <Link href="/auth/login"> 
+          <Button variant="outline" size="lg" className="cursor-pointer hover:bg-gray-100 transition-colors">
+            Iniciar Sesión
+          </Button>
+        </Link>
+        <Link href="/auth/signup"> 
+          <Button size="lg" className="cursor-pointer hover:bg-blue-700 transition-colors">
+            Registrate
+          </Button>
+        </Link>
+      </div>
+    )}
 
-        {user && (
-          <div className="flex items-center gap-4">
-            <Avatar onClick={logoutHandler} className="cursor-pointer hover:opacity-80 transition-opacity">
-              <AvatarFallback className="font-bold uppercase bg-blue-600 text-white">
-                {user.username.charAt(0)}
-              </AvatarFallback>
-            </Avatar>
-            <Link href="/dashboard">
-              <Button className="cursor-pointer hover:bg-blue-700 transition-colors">
-                Dashboard
-              </Button>
-            </Link>
-            <Button 
-              className="cursor-pointer" 
-              variant="ghost" 
-              size="sm"
-            >
-              {user.isVerified ? "Verified" : "Not Verified"}
-            </Button>
-          </div>
-        )}
+    {user && (
+      <div className="flex items-center gap-4">
+        <Avatar onClick={logoutHandler} className="cursor-pointer hover:opacity-80 transition-opacity">
+          <AvatarFallback className="font-bold uppercase bg-blue-600 text-white">
+            {user.username.charAt(0)}
+          </AvatarFallback>
+        </Avatar>
+        <Link href="/dashboard">
+          <Button className="cursor-pointer hover:bg-blue-700 transition-colors">
+            Dashboard
+          </Button>
+        </Link>
+        <Button 
+          className="cursor-pointer" 
+          variant="ghost" 
+          size="sm"
+        >
+          {user.isVerified ? "Verified" : "Not Verified"}
+        </Button>
       </div>
-      <div className="flex items-center justify-center h-[80vh]">
-        <h1 className="text-5xl font-bold text-center">Welcome to IPCE Building Management System</h1>
-      </div>
-    </div>
+    )}
+  </div>
+  <div className="flex items-center justify-center h-[80vh]">
+    <h1 className="text-5xl font-bold text-center">Welcome to IPCE Building Management System</h1>
+  </div>
+</div>
   );
 };
 

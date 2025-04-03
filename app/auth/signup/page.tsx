@@ -63,7 +63,7 @@ const Signup = () => {
   return (
     <div className='flex items-center justify-center h-screen bg-gray-100'>
       <div className='shadow-md rounded-lg  w-[80%] sm:w-[350px] lg:w-[450px] p-8 bg-white'>
-        <h1 className='text-center font-bold text-3xl mb-4 mt-4'>LOGO</h1>
+        <h1 className='text-center font-bold text-3xl mb-4 mt-4'>IPCE</h1>
         <form onSubmit={submitHandler}>
           <div className='mt-4'>
             <label htmlFor='username' className = "block mb-2  text-sm font-bold"> Username</label>
