@@ -20,10 +20,14 @@ const HomePage = () => {
       await axios.post(`${API_URL}/users/logout`, {}, { withCredentials: true });
       dispatch(setAuthUser(null));
       toast.success('Logged out successfully');
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Logout failed. Please try again.';
-      toast.error(errorMessage);
-      console.error('Logout error:', error);
+    }     catch (error) {
+      // Type guard to ensure error is AxiosError
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred');
+      }
+      console.log(error);
     }
   };
 

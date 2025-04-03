@@ -45,8 +45,13 @@ const Signup = () => {
       router.push('/auth/verify');
       console.log(user)
 
-    } catch (error:any) {
-      toast.error(error.response.data.message);
+    } catch (error) {
+      // Type guard to ensure error is AxiosError
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred');
+      }
       console.log(error);
     }
     finally {

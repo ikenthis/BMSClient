@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { Loader } from 'lucide-react';
 import { API_URL } from '@/server';
 import { useDispatch } from 'react-redux';
@@ -42,11 +42,16 @@ const Login = () => {
       dispatch(setAuthUser(user)); 
       router.push('/');
       console.log(user)
-
-    } catch (error:any) {
-      toast.error(error.response.data.message);
-      console.log(error);
-    }
+    } 
+    catch (error) {
+        // Type guard to ensure error is AxiosError
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error('An error occurred');
+        }
+        console.log(error);
+      }
     finally {
       setLoading(false);
     }
