@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { Loader } from 'lucide-react';
 import { API_URL } from '@/server';
 import { useDispatch } from 'react-redux';

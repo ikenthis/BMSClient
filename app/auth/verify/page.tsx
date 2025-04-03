@@ -1,6 +1,6 @@
 "use client";
 import { Button } from '@/components/ui/button';
-import React, { ChangeEvent, KeyboardEvent, use, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { API_URL } from '@/server';
@@ -76,11 +76,15 @@ const Verify = () => {
       dispatch(setAuthUser(verifiedUser));
       toast.success('Verificación exitosa');
       router.push('/');
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Verificaición fallida. Porfavor intenta de nuevo.';
-      toast.error(errorMessage);
-      console.error('Verification error:', error);
-    } finally {
+    }  catch (error) {
+      // Type guard to ensure error is AxiosError
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred');
+      }
+      console.log(error);
+    }finally {
       setLoading(false);
     }
   };
@@ -93,9 +97,14 @@ const Verify = () => {
         {withCredentials: true}
       );
       toast.success('Nuevo OTP enviado satisfactoriamente');
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Fallo al enviar el OTP. Porfavor intenta de nuevo.';
-      toast.error(errorMessage);
+    } catch (error) {
+      // Type guard to ensure error is AxiosError
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred');
+      }
+      console.log(error);
     }
   };
 
