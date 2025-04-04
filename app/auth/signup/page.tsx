@@ -1,17 +1,18 @@
 "use client";
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import React, { useState } from 'react'
+
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Loader } from 'lucide-react';
+import { Loader, Mail, Lock, User, Building, ArrowRight, CheckCircle } from 'lucide-react';
 import { API_URL } from '@/server';
 import { useDispatch } from 'react-redux';
 import { setAuthUser } from '@/store/authSlice'; 
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 const Signup = () => {
-
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -22,7 +23,7 @@ const Signup = () => {
     email: "",
     password: "",
     passwordConfirm: ""
-  })
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,7 +35,7 @@ const Signup = () => {
   };
 
   const submitHandler = async(e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     setLoading(true);
     try {
       const response = await axios.post(`${API_URL}/users/signup`, formData, {withCredentials: true});
@@ -43,10 +44,9 @@ const Signup = () => {
       toast.success('Usuario creado satisfactoriamente');
       dispatch(setAuthUser(user)); 
       router.push('/auth/verify');
-      console.log(user)
+      console.log(user);
 
     } catch (error) {
-      // Type guard to ensure error is AxiosError
       if (axios.isAxiosError(error) && error.response) {
         toast.error(error.response.data.message);
       } else {
@@ -57,67 +57,159 @@ const Signup = () => {
     finally {
       setLoading(false);
     }
-    console.log(formData);
-  }
+  };
 
   return (
-    <div className='flex items-center justify-center h-screen bg-gray-100'>
-      <div className='shadow-md rounded-lg  w-[80%] sm:w-[350px] lg:w-[450px] p-8 bg-white'>
-        <h1 className='text-center font-bold text-3xl mb-4 mt-4'>IPCE</h1>
-        <form onSubmit={submitHandler}>
-          <div className='mt-4'>
-            <label htmlFor='username' className = "block mb-2  text-sm font-bold"> Username</label>
-            <input 
-              type="text" 
-              name='username' 
-              placeholder='Ingresa tu Username'
-              value={formData.username}
-              onChange={handleChange}
-              className='py-2 bg-gray-200 rounded-md outline-none w-full'/>
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white rounded-2xl shadow-xl overflow-hidden"
+        >
+          <div className="p-8">
+            {/* Logo/Header */}
+            <div className="flex items-center justify-center gap-2 mb-8">
+              <Building className="w-8 h-8 text-blue-600" />
+              <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">IPCE</h1>
+            </div>
+            
+            <h2 className="text-2xl font-semibold text-gray-800 text-center mb-2">Crea tu cuenta</h2>
+            <p className="text-gray-500 text-center mb-8">Únete al sistema de gestión de edificios IPCE</p>
+            
+            <form onSubmit={submitHandler}>
+              <div className="mb-4">
+                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-700">
+                  Nombre de usuario
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <User className="w-5 h-5 text-gray-400" />
+                  </div>
+                  <input 
+                    type="text" 
+                    name="username" 
+                    id="username"
+                    placeholder="usuario123"
+                    value={formData.username}
+                    onChange={handleChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3 transition-all"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="mb-4">
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <Mail className="w-5 h-5 text-gray-400" />
+                  </div>
+                  <input 
+                    type="email" 
+                    name="email" 
+                    id="email"
+                    placeholder="nombre@ejemplo.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3 transition-all"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="mb-4">
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-700">
+                  Contraseña
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <Lock className="w-5 h-5 text-gray-400" />
+                  </div>
+                  <input 
+                    type="password" 
+                    name="password" 
+                    id="password"
+                    placeholder="••••••••"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3 transition-all"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="mb-6">
+                <label htmlFor="passwordConfirm" className="block mb-2 text-sm font-medium text-gray-700">
+                  Confirmar contraseña
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <CheckCircle className="w-5 h-5 text-gray-400" />
+                  </div>
+                  <input 
+                    type="password" 
+                    name="passwordConfirm" 
+                    id="passwordConfirm"
+                    placeholder="••••••••"
+                    value={formData.passwordConfirm}
+                    onChange={handleChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3 transition-all"
+                    required
+                  />
+                </div>
+              </div>
+              
+              {!loading ? (
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg text-sm px-5 py-6 text-center shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  Crear cuenta <ArrowRight className="w-4 h-4" />
+                </Button>
+              ) : (
+                <Button 
+                  disabled 
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg text-sm px-5 py-6 text-center opacity-80 flex items-center justify-center"
+                >
+                  <Loader className="mr-2 h-5 w-5 animate-spin" />
+                  Procesando...
+                </Button>
+              )}
+            </form>
+            
+            <div className="relative flex items-center justify-center mt-8 mb-4">
+              <div className="w-full h-px bg-gray-200"></div>
+              <span className="absolute bg-white px-4 text-sm text-gray-500">o</span>
+            </div>
+            
+            <Button 
+              variant="outline"
+              className="w-full bg-white border-2 border-gray-200 text-gray-700 font-medium rounded-lg text-sm px-5 py-5 text-center mb-6 hover:bg-gray-50 transition-colors"
+            >
+              Continuar con Google
+            </Button>
+            
+            <p className="text-center text-gray-600">
+              ¿Ya tienes una cuenta?{' '}
+              <Link href="/auth/login">
+                <span className="text-blue-600 font-semibold hover:text-blue-800 transition-colors cursor-pointer">
+                  Iniciar sesión
+                </span>
+              </Link>
+            </p>
           </div>
-          <div className='mt-4'>
-            <label htmlFor='email' className = "block mb-2  text-sm font-bold"> Email</label>
-            <input 
-              type="email" 
-              name='email' 
-              placeholder='Ingresa tu Email'
-              value={formData.email}
-              onChange={handleChange}
-              className='py-2 bg-gray-200 rounded-md outline-none w-full'/>
-          </div>
-          <div className='mt-4'>
-            <label htmlFor='password' className = "block mb-2  text-sm font-bold"> Password</label>
-            <input 
-              type="password" 
-              name='password' 
-              placeholder='Ingresa tu Password'
-              value={formData.password}
-              onChange={handleChange}
-              className='py-2 bg-gray-200 rounded-md outline-none w-full'/>
-          </div>
-          <div className='mt-4'>
-            <label htmlFor='passwordConfirm' className = "block mb-2  text-sm font-bold"> Confirm Password</label>
-            <input 
-              type="password" 
-              name='passwordConfirm' 
-              placeholder='Confirma tu Password'
-              value={formData.passwordConfirm}
-              onChange={handleChange}
-              className='py-2 bg-gray-200 rounded-md outline-none w-full'/>
-          </div>
-          {!loading && (<Button type='submit' className='mt-6 w-full'>Enviar</Button>)}
-          {loading && (
-          <Button className='mt-6 w-full' disabled>
-            <Loader className='mr-2 h-4 w-4 animate-spin' />
-          </Button>
-        )}
-        </form>
-        <h1 className='mt-4 text-center'>¿Ya tienes una cuenta? 
-          <Link href='/auth/login'> <span className='text-blue-600 cursor-pointer' > Login</span></Link>
-        </h1>
+        </motion.div>
+        
+        <p className="text-center text-gray-500 text-sm mt-6">
+          © 2025 IPCE Building Management. Todos los derechos reservados.
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
