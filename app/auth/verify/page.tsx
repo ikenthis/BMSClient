@@ -1,14 +1,12 @@
 "use client";
-import { Button } from '@/components/ui/button';
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { API_URL } from '@/server';
 import { Loader } from 'lucide-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuthUser } from '@/store/authSlice';
 import { useRouter } from 'next/navigation';
-import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 
 const Verify = () => {
@@ -24,11 +22,8 @@ const Verify = () => {
     if (!user) router.replace("/auth/signup"); 
   }, [user, router]);
 
-  const handleChange = (
-    index: number, 
-    event: ChangeEvent<HTMLInputElement>
-  ): void => {
-    const { value } = event.target;
+  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
     // Only accept single digit
     if (value.length > 1) return;
     
@@ -42,15 +37,8 @@ const Verify = () => {
     }
   };
 
-  const handleKeyDown = (
-    index: number,
-    event: KeyboardEvent<HTMLInputElement>
-  ): void => {
-    if (
-      event.key === 'Backspace' &&
-      !otp[index] &&
-      index > 0
-    ) {
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
@@ -76,15 +64,14 @@ const Verify = () => {
       dispatch(setAuthUser(verifiedUser));
       toast.success('Verificación exitosa');
       router.push('/');
-    }  catch (error) {
-      // Type guard to ensure error is AxiosError
+    } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast.error(error.response.data.message);
       } else {
         toast.error('An error occurred');
       }
       console.log(error);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -98,7 +85,6 @@ const Verify = () => {
       );
       toast.success('Nuevo OTP enviado satisfactoriamente');
     } catch (error) {
-      // Type guard to ensure error is AxiosError
       if (axios.isAxiosError(error) && error.response) {
         toast.error(error.response.data.message);
       } else {
@@ -108,14 +94,19 @@ const Verify = () => {
     }
   };
 
-
   return (
-    <div className='h-screen flex flex-col items-center justify-center bg-gray-50'>
-      <div className='bg-white p-8 rounded-lg shadow-md max-w-xl w-full'>
-        <h1 className='text-2xl mb-6 font-semibold text-center'>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#121827]">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-bold text-[#3b82f6] mb-2">IPCE</h1>
+        <h2 className="text-3xl text-white mb-6">Smart Building Management System</h2>
+      </div>
+      
+      <div className="bg-[#1e293b] p-8 rounded-lg shadow-lg max-w-xl w-full">
+        <h3 className="text-2xl mb-6 font-semibold text-center text-white">
           Ingresa los 6 digitos del código de verificación
-        </h1>
-        <div className='flex gap-2 md:gap-3 justify-center'>
+        </h3>
+        
+        <div className="flex gap-2 md:gap-3 justify-center">
           {[0, 1, 2, 3, 4, 5].map((index) => (
             <input 
               type="text" 
@@ -128,31 +119,41 @@ const Verify = () => {
                 inputRefs.current[index] = el;
               }}
               onKeyDown={(e) => handleKeyDown(index, e)}
-              className='w-12 h-12 md:w-14 md:h-14 rounded-lg bg-gray-100 text-2xl font-bold text-center focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all'
+              className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#2a3a5a] text-2xl font-bold text-center text-white border border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6] focus:outline-none transition-all"
             />
           ))}
         </div>
-        <div className='flex items-center justify-center gap-4 mt-8'>
-          <Button 
-            variant='default' 
+        
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button 
             onClick={handleSubmit} 
             disabled={loading}
-            className='min-w-24'
+            className="bg-[#3b82f6] hover:bg-[#2563eb] text-white py-2 px-6 rounded-md transition-colors min-w-24 flex items-center justify-center"
           >
             {loading ? (
-              <><Loader className='mr-2 h-4 w-4 animate-spin' /> Verificando...</>
+              <><Loader className="mr-2 h-4 w-4 animate-spin" /> Verificando...</>
             ) : (
               'Verify'
             )}
-          </Button>
-          <Button 
-            className="bg-blue-600 hover:bg-blue-700 transition-colors min-w-32"
+          </button>
+          
+          <button 
             onClick={handleResendOtp}
             disabled={loading}
+            className="bg-transparent border border-[#3b82f6] text-[#3b82f6] hover:bg-[#3b82f6] hover:text-white py-2 px-6 rounded-md transition-colors min-w-32"
           >
-            Reenvia OTP
-          </Button>
+            Reenviar OTP
+          </button>
         </div>
+      </div>
+      
+      <div className="mt-6 flex gap-4">
+        <a href="/auth/login" className="text-[#3b82f6] hover:underline">
+          Iniciar Sesión
+        </a>
+        <a href="/auth/signup" className="text-[#3b82f6] hover:underline">
+          Registrate
+        </a>
       </div>
     </div>
   );
