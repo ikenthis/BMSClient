@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { RootState } from "@/store/store";
@@ -31,12 +30,12 @@ const HomePage = () => {
     try {
       await axios.post(`${API_URL}/users/logout`, {}, { withCredentials: true });
       dispatch(setAuthUser(null));
-      toast.success('Logged out successfully');
+      toast.success('Sesión cerrada exitosamente');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast.error(error.response.data.message);
       } else {
-        toast.error('An error occurred');
+        toast.error('Ocurrió un error');
       }
       console.log(error);
     }
@@ -44,7 +43,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      {/* Navbar */}
+      {/* Barra de navegación */}
       <header 
         className={`fixed w-full z-50 transition-all duration-300 ${
           scrolled ? 'bg-gray-900/95 backdrop-blur-md shadow-lg py-3' : 'bg-gray-900 py-5'
@@ -56,13 +55,13 @@ const HomePage = () => {
             <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">IPCE</h1>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Navegación para escritorio */}
           <div className="hidden md:flex items-center gap-8">
             <nav>
               <ul className="flex gap-6">
-                <li><a href="#features" className="font-medium text-blue-100 hover:text-blue-400 transition-colors">Features</a></li>
-                <li><a href="#about" className="font-medium text-blue-100 hover:text-blue-400 transition-colors">About</a></li>
-                <li><a href="#contact" className="font-medium text-blue-100 hover:text-blue-400 transition-colors">Contact</a></li>
+                <li><a href="#features" className="font-medium text-blue-100 hover:text-blue-400 transition-colors">Características</a></li>
+                <li><a href="#about" className="font-medium text-blue-100 hover:text-blue-400 transition-colors">Acerca de</a></li>
+                <li><a href="#contact" className="font-medium text-blue-100 hover:text-blue-400 transition-colors">Contacto</a></li>
               </ul>
             </nav>
             
@@ -77,7 +76,7 @@ const HomePage = () => {
                 <Link href="/auth/signup"> 
                   <Button 
                     className="cursor-pointer bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 transition-all duration-300 rounded-md px-6 shadow-md hover:shadow-lg">
-                    Registrate
+                    Registrarse
                   </Button>
                 </Link>
               </div>
@@ -95,12 +94,12 @@ const HomePage = () => {
                       {user.isVerified ? (
                         <span className="flex items-center text-green-400">
                           <span className="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
-                          Verified
+                          Verificado
                         </span>
                       ) : (
                         <span className="flex items-center text-amber-400">
                           <span className="w-2 h-2 bg-amber-400 rounded-full mr-1"></span>
-                          Not Verified
+                          No verificado
                         </span>
                       )}
                     </span>
@@ -110,7 +109,7 @@ const HomePage = () => {
                 <Link href="/dashboard">
                   <Button 
                     className="cursor-pointer bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 transition-all duration-300 rounded-md flex items-center gap-1 shadow-md hover:shadow-lg">
-                    Dashboard <ChevronRight className="w-4 h-4" />
+                    Panel <ChevronRight className="w-4 h-4" />
                   </Button>
                 </Link>
                 
@@ -126,7 +125,7 @@ const HomePage = () => {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Botón del menú móvil */}
           <button 
             className="md:hidden block text-gray-300"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -135,15 +134,15 @@ const HomePage = () => {
           </button>
         </div>
 
-        {/* Mobile menu */}
+        {/* Menú móvil */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-gray-800 absolute w-full shadow-lg">
             <div className="w-[90%] mx-auto py-4">
               <nav className="mb-6">
                 <ul className="flex flex-col gap-4">
-                  <li><a href="#features" className="font-medium text-blue-100 block py-2">Features</a></li>
-                  <li><a href="#about" className="font-medium text-blue-100 block py-2">About</a></li>
-                  <li><a href="#contact" className="font-medium text-blue-100 block py-2">Contact</a></li>
+                  <li><a href="#features" className="font-medium text-blue-100 block py-2">Características</a></li>
+                  <li><a href="#about" className="font-medium text-blue-100 block py-2">Acerca de</a></li>
+                  <li><a href="#contact" className="font-medium text-blue-100 block py-2">Contacto</a></li>
                 </ul>
               </nav>
               
@@ -158,7 +157,7 @@ const HomePage = () => {
                   <Link href="/auth/signup" className="w-full"> 
                     <Button 
                       className="w-full cursor-pointer bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 transition-all duration-300 rounded-md">
-                      Registrate
+                      Registrarse
                     </Button>
                   </Link>
                 </div>
@@ -173,14 +172,14 @@ const HomePage = () => {
                     <div className="flex flex-col">
                       <span className="text-sm font-medium">{user.username}</span>
                       <span className="text-xs text-gray-400">
-                        {user.isVerified ? "Verified" : "Not Verified"}
+                        {user.isVerified ? "Verificado" : "No verificado"}
                       </span>
                     </div>
                   </div>
                   
                   <Link href="/dashboard" className="w-full">
                     <Button className="w-full cursor-pointer bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 transition-all duration-300 rounded-md">
-                      Dashboard
+                      Panel
                     </Button>
                   </Link>
                   
@@ -189,7 +188,7 @@ const HomePage = () => {
                     variant="outline" 
                     className="w-full cursor-pointer border-red-900 text-red-400 hover:bg-red-900/20 transition-colors"
                   >
-                    <LogOut className="w-5 h-5 mr-2" /> Logout
+                    <LogOut className="w-5 h-5 mr-2" /> Cerrar Sesión
                   </Button>
                 </div>
               )}
@@ -198,9 +197,9 @@ const HomePage = () => {
         )}
       </header>
 
-      {/* Main Content */}
+      {/* Contenido principal */}
       <main>
-        {/* Hero Section */}
+        {/* Sección Hero */}
         <section className="pt-32 pb-20 md:pt-40 md:pb-32">
           <div className="w-[90%] max-w-7xl mx-auto">
             <div className="flex flex-col items-center text-center mb-10">
@@ -210,7 +209,7 @@ const HomePage = () => {
                 transition={{ duration: 0.6 }}
                 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600 tracking-tight leading-tight"
               >
-                Smart Building Management System
+                Sistema Inteligente de Gestión de Edificios
               </motion.h1>
               
               <motion.p 
@@ -219,7 +218,7 @@ const HomePage = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-xl md:text-2xl text-blue-100 max-w-3xl mb-10"
               >
-                Revolutionize how you manage your building infrastructure with our state-of-the-art IPCE platform
+                Revoluciona cómo gestionas la infraestructura de tus edificios con nuestra plataforma IPCE de última generación
               </motion.p>
               
               <motion.div 
@@ -229,10 +228,10 @@ const HomePage = () => {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <Button size="lg" className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-lg px-8 py-6 rounded-md shadow-lg hover:shadow-xl transition-all duration-300">
-                  Get Started <ArrowRight className="ml-2 w-5 h-5" />
+                  Comenzar <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
                 <Button variant="outline" size="lg" className="border-2 border-blue-400 text-blue-400 hover:bg-blue-900/30 text-lg px-8 py-6 rounded-md transition-all duration-300">
-                  Learn More
+                  Saber más
                 </Button>
               </motion.div>
             </div>
@@ -247,16 +246,16 @@ const HomePage = () => {
                 <Building className="w-20 h-20 text-blue-400 opacity-20" />
               </div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <h3 className="text-white text-xl md:text-3xl font-medium">Interactive Dashboard Preview</h3>
+                <h3 className="text-white text-xl md:text-3xl font-medium">Vista previa del panel interactivo</h3>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Features Section - just a placeholder */}
+        {/* Sección de características */}
         <section id="features" className="py-20 bg-gray-800">
           <div className="w-[90%] max-w-7xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-blue-100">Powerful Features</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-blue-100">Características poderosas</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -264,8 +263,8 @@ const HomePage = () => {
                   <div className="w-12 h-12 rounded-full bg-blue-900/50 flex items-center justify-center mb-4">
                     <Building className="w-6 h-6 text-blue-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-blue-100">Feature {i}</h3>
-                  <p className="text-gray-300">A powerful feature that enhances your building management experience.</p>
+                  <h3 className="text-xl font-semibold mb-2 text-blue-100">Característica {i}</h3>
+                  <p className="text-gray-300">Una característica potente que mejora tu experiencia de gestión de edificios.</p>
                 </div>
               ))}
             </div>
@@ -273,7 +272,7 @@ const HomePage = () => {
         </section>
       </main>
 
-      {/* Footer */}
+      {/* Pie de página */}
       <footer className="bg-gray-950 text-white py-12">
         <div className="w-[90%] max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between gap-8">
@@ -283,42 +282,42 @@ const HomePage = () => {
                 <h2 className="text-2xl font-bold text-white">IPCE</h2>
               </div>
               <p className="text-gray-400 max-w-md">
-                The most advanced building management system for modern infrastructure needs.
+                El sistema de gestión de edificios más avanzado para las necesidades de infraestructura moderna.
               </p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-blue-100">Product</h3>
+                <h3 className="text-lg font-semibold mb-4 text-blue-100">Producto</h3>
                 <ul className="space-y-2">
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Features</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Pricing</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Documentation</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Características</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Precios</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Documentación</a></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-blue-100">Company</h3>
+                <h3 className="text-lg font-semibold mb-4 text-blue-100">Empresa</h3>
                 <ul className="space-y-2">
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">About</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Acerca de</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Blog</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Careers</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Carreras</a></li>
                 </ul>
               </div>
               
               <div>
                 <h3 className="text-lg font-semibold mb-4 text-blue-100">Legal</h3>
                 <ul className="space-y-2">
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Privacy</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Terms</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Security</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Privacidad</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Términos</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Seguridad</a></li>
                 </ul>
               </div>
             </div>
           </div>
           
           <div className="mt-12 pt-8 border-t border-gray-800 text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center">
-            <p>© 2025 IPCE Building Management. All rights reserved.</p>
+            <p>© 2025 IPCE Gestión de Edificios. Todos los derechos reservados.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-blue-400 transition-colors">Twitter</a>
               <a href="#" className="hover:text-blue-400 transition-colors">LinkedIn</a>
