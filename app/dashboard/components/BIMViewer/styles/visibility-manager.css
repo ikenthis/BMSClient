@@ -1,0 +1,168 @@
+/* Estilos adicionales para la funcionalidad de visibilidad en el toolbar */
+.visibility-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 12px;
+  }
+  
+  .visibility-panel .search-box {
+    position: relative;
+  }
+  
+  .visibility-panel .search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    padding-right: 32px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    font-size: 13px;
+  }
+  
+  .visibility-panel .search-box .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+  }
+  
+  .visibility-panel .visibility-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    max-height: 280px;
+    padding-right: 4px;
+  }
+  
+  .visibility-panel .visibility-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background-color 0.15s;
+  }
+  
+  .visibility-panel .visibility-option:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .visibility-panel .visibility-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  .visibility-panel .visibility-option label {
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .visibility-panel .visibility-option .category-code {
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+  
+  .visibility-panel .panel-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .visibility-panel .panel-action-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .visibility-panel .panel-action-button:hover:not(:disabled) {
+    background-color: #2563eb;
+  }
+  
+  .visibility-panel .panel-action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .visibility-panel .panel-action-button.secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f3f4f6;
+  }
+  
+  .visibility-panel .panel-action-button.secondary:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .visibility-panel .loading-indicator,
+  .visibility-panel .empty-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+    font-style: italic;
+  }
+  
+  .visibility-panel .loading-indicator {
+    gap: 8px;
+  }
+  
+  .visibility-panel .loading-indicator .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .visibility-panel .operation-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  
+  .visibility-panel .operation-message.info {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+  }
+  
+  .visibility-panel .operation-message.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+  }
+  
+  .visibility-panel .operation-message.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+  }

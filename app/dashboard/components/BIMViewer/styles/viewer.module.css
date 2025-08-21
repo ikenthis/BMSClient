@@ -1,0 +1,391 @@
+/* viewer.module.css - Styles for the BIM Viewer components */
+
+/* Main container */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .viewerCanvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Loading states */
+  .loadingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+  }
+  
+  .loadingContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .loadingSpinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Error states */
+  .errorOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: red;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+  }
+  
+  .errorContent {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 80%;
+    text-align: center;
+  }
+  
+  .errorIcon {
+    margin: 0 auto 16px;
+  }
+  
+  .errorTitle {
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .errorMessage {
+    color: #666;
+  }
+  
+  /* Toolbar */
+  .toolbar {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+  }
+  
+  .toolbarButton {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a3f5f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .toolbarButton:hover {
+    background-color: #3a5683;
+  }
+  
+  .toolbarButtonActive {
+    background-color: #3e5f8a;
+  }
+  
+  /* Functions Panel */
+  .functionsPanel {
+    position: absolute;
+    bottom: 68px;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 12px;
+    width: 280px;
+    z-index: 900;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .functionsPanelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #e0e7ee;
+    padding-bottom: 8px;
+  }
+  
+  .functionsPanelTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2a3f5f;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2a3f5f;
+    display: flex;
+    padding: 4px;
+  }
+  
+  .functionButton {
+    padding: 8px 12px;
+    margin: 4px 0;
+    background-color: #f0f4f8;
+    color: #2a3f5f;
+    border: 1px solid #e0e7ee;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  
+  .functionButton:hover {
+    background-color: #e9f0f9;
+    border-color: #d0e0f0;
+  }
+  
+  .activeFunctionButton {
+    background-color: #e9f0f9;
+    border-color: #c0d5e8;
+    font-weight: 500;
+  }
+  
+  .functionButtonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .functionHint {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+  
+  /* Data Panel */
+  .dataPanel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 400px;
+    max-height: 80vh;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    padding: 0;
+    z-index: 900;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .dataPanelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #2a3f5f 0%, #3a5683 100%);
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .dataPanelHeaderContent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .dataPanelIcon {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dataPanelTitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .dataPanelId {
+    display: inline-flex;
+    padding: 3px 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  
+  .dataPanelType {
+    text-transform: capitalize;
+  }
+  
+  .dataPanelSubtitle {
+    margin: 3px 0 0 0;
+    font-size: 13px;
+    opacity: 0.9;
+    font-weight: 400;
+  }
+  
+  .dataPanelCloseButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: M;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dataPanelContent {
+    padding: 6px 0;
+    max-height: calc(80vh - 60px);
+    overflow: auto;
+  }
+  
+  .dataPanelMessage {
+    padding: 16px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .dataPanelPlaceholder {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  /* Attribute styling */
+  .attributeItem {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+  }
+  
+  .attributeName {
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #2a3f5f;
+    font-size: 12px;
+  }
+  
+  .attributeValue {
+    color: #333;
+    overflow-wrap: break-word;
+  }
+  
+  /* Property sets styling */
+  .propertySet {
+    margin: 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .propertySetHeader {
+    padding: 10px 16px;
+    background: #fff;
+    font-weight: 500;
+    font-size: 13px;
+    color: #2a3f5f;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .propertySetHeaderAlt {
+    background: #f9fafc;
+  }
+  
+  .propertyItem {
+    padding: 8px 16px 8px 24px;
+    border-top: 1px solid #f2f2f2;
+    display: flex;
+    font-size: 12px;
+  }
+  
+  .propertyName {
+    width: 50%;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .propertyValue {
+    width: 50%;
+    color: #666;
+    overflow-wrap: break-word;
+  }
+  
+  /* Status toast */
+  .statusToast {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(42, 63, 95, 0.9);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    text-align: center;
+  }

@@ -1,0 +1,699 @@
+/* Estilos modernizados para ElementIsolationManager */
+
+.element-isolation-panel {
+    position: absolute;
+    top: 20px;
+    left: 825px; /* Posicionado a la izquierda, similar al ViewerToolbar */
+    width: 330px;
+    background-color: #1a1f2e; /* Fondo oscuro como en la imagen */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    border: 1px solid #2c3142;
+    color: #ffffff;
+  }
+  
+  .isolation-panel-header {
+    padding: 10px 16px;
+    background-color: #212635;
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2c3142;
+    height: 40px; /* Altura fija para mantener consistencia con el toolbar */
+  }
+  
+  .isolation-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .isolation-panel-title h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+  }
+  
+  .isolation-close-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .isolation-close-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .isolation-panel-content {
+    padding: 12px;
+    overflow-y: auto;
+    position: relative;
+    max-height: calc(100vh - 200px);
+    scrollbar-width: thin;
+    scrollbar-color: #3b9aff #1e2437;
+  }
+  
+  /* Encabezado de descripción */
+  .isolation-header {
+    margin-bottom: 12px;
+  }
+  
+  .isolation-description {
+    margin: 0;
+    font-size: 13px;
+    color: #b0b6c4;
+    line-height: 1.4;
+  }
+  
+  /* Estilos para botones de acción del panel */
+  .panel-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+  
+  .panel-action-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: rgba(59, 154, 255, 0.15);
+    color: #3b9aff;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .panel-action-button:hover {
+    background-color: rgba(59, 154, 255, 0.25);
+  }
+  
+  .panel-action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .panel-action-button.secondary {
+    background-color: rgba(211, 47, 47, 0.15);
+    color: #f44336;
+  }
+  
+  .panel-action-button.secondary:hover {
+    background-color: rgba(211, 47, 47, 0.25);
+  }
+  
+  .active-isolation {
+    display: block;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: rgba(35, 131, 226, 0.15);
+    border-radius: 4px;
+    color: #3b9aff;
+    font-size: 12px;
+  }
+  
+  /* Indicador de carga */
+  .loading-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 31, 46, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: 8px;
+  }
+  
+  .spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid #2c3142;
+    border-top: 3px solid #3b9aff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 8px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Buscador */
+  .search-box {
+    position: relative;
+    margin-bottom: 12px;
+  }
+  
+  .search-box input {
+    width: 100%;
+    padding: 8px 16px 8px 36px;
+    border: 1px solid #2c3142;
+    border-radius: 4px;
+    font-size: 13px;
+    background-color: #1e2437;
+    color: #ffffff;
+  }
+  
+  .search-box input::placeholder {
+    color: #8891a7;
+  }
+  
+  .search-box input:focus {
+    outline: none;
+    border-color: #3b9aff;
+    box-shadow: 0 0 0 1px rgba(59, 154, 255, 0.3);
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8891a7;
+  }
+  
+  /* Lista de opciones de aislamiento */
+  .isolation-options {
+    margin-bottom: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #2c3142;
+    border-radius: 4px;
+    background-color: #1e2437;
+    scrollbar-width: thin;
+    scrollbar-color: #3b9aff #1e2437;
+    
+    /* Estilos para WebKit (Chrome, Safari, etc.) */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #1e2437;
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: #3b9aff;
+      border-radius: 4px;
+      border: 2px solid #1e2437;
+    }
+  }
+  
+  .isolation-option {
+    padding: 8px 10px;
+    border-bottom: 1px solid #2c3142;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .isolation-option:last-child {
+    border-bottom: none;
+  }
+  
+  .isolation-option:hover {
+    background-color: #262c3e;
+  }
+  
+  .isolation-option.active {
+    background-color: rgba(59, 154, 255, 0.1);
+    border-left: 3px solid #3b9aff;
+  }
+  
+  .isolation-option-icon {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    color: #8891a7;
+  }
+  
+  .isolation-option.active .isolation-option-icon {
+    color: #3b9aff;
+  }
+  
+  .isolation-option-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .category-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: #ffffff;
+  }
+  
+  .category-code {
+    font-size: 11px;
+    color: #8891a7;
+    margin-top: 2px;
+  }
+  
+  .no-categories {
+    padding: 16px;
+    text-align: center;
+    color: #8891a7;
+    font-size: 13px;
+  }
+  
+  /* Botón para quitar aislamiento */
+  .reset-isolation {
+    margin-top: 12px;
+    text-align: center;
+  }
+  
+  .reset-button {
+    padding: 7px 14px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .reset-button:hover {
+    background-color: #b71c1c;
+  }
+  
+  .reset-button:disabled {
+    background-color: rgba(211, 47, 47, 0.5);
+    cursor: not-allowed;
+  }
+  
+  /* Estilos para el resumen de visibilidad */
+  .visibility-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    background-color: rgba(59, 154, 255, 0.08);
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #b0b6c4;
+  }
+  
+  .summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .summary-item strong {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 2px;
+  }
+  
+  .summary-item.total strong {
+    color: #3b9aff;
+  }
+  
+  /* Estilos para la vista de categoría aislada */
+  .isolation-active-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    background-color: rgba(59, 154, 255, 0.1);
+    padding: 8px 10px;
+    border-radius: 4px;
+  }
+  
+  .isolation-active-category {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .isolation-category-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: #3b9aff;
+  }
+  
+  .isolation-category-code {
+    font-size: 11px;
+    color: #6ea8ff;
+  }
+  
+  .toggle-elements-list-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(59, 154, 255, 0.15);
+    border: none;
+    color: #3b9aff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .toggle-elements-list-button:hover {
+    background-color: rgba(59, 154, 255, 0.25);
+  }
+  
+  /* Elementos de la lista */
+  .elements-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #8891a7;
+  }
+  
+  .elements-count {
+    font-weight: 500;
+  }
+  
+  .focused-element {
+    color: #3b9aff;
+    font-weight: 500;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .isolated-elements-list {
+    margin-bottom: 12px;
+    max-height: 260px;
+    overflow-y: auto;
+    border: 1px solid #2c3142;
+    border-radius: 4px;
+    background-color: #1e2437;
+    scrollbar-width: thin;
+    scrollbar-color: #3b9aff #1e2437;
+    
+    /* Estilos para WebKit (Chrome, Safari, etc.) */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #1e2437;
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: #3b9aff;
+      border-radius: 4px;
+      border: 2px solid #1e2437;
+    }
+  }
+  
+  .isolated-element {
+    padding: 8px 10px;
+    border-bottom: 1px solid #2c3142;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .isolated-element:last-child {
+    border-bottom: none;
+  }
+  
+  .isolated-element:hover {
+    background-color: #262c3e;
+  }
+  
+  .isolated-element.focused {
+    background-color: rgba(59, 154, 255, 0.1);
+    border-left: 3px solid #3b9aff;
+  }
+  
+  .element-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0; /* Para que funcione el text-overflow */
+  }
+  
+  .element-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .element-type {
+    font-size: 11px;
+    color: #8891a7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .element-id {
+    font-size: 10px;
+    color: #6e768b;
+  }
+  
+  .focus-icon {
+    color: #6e768b;
+    margin-left: 8px;
+  }
+  
+  .isolated-element:hover .focus-icon {
+    color: #3b9aff;
+  }
+  
+  .isolated-element.focused .focus-icon {
+    color: #3b9aff;
+  }
+  
+  .no-elements {
+    padding: 16px;
+    text-align: center;
+    color: #8891a7;
+    font-size: 13px;
+  }
+  
+  /* Estilos para checkbox de categorías */
+  .category-checkbox {
+    display: flex;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+  
+  .category-checkbox input[type="checkbox"] {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    appearance: none;
+    background-color: #1e2437;
+    border: 1px solid #3b9aff;
+    border-radius: 2px;
+  }
+  
+  .category-checkbox input[type="checkbox"]:checked {
+    background-color: #3b9aff;
+  }
+  
+  .category-checkbox input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  /* Estilos responsive */
+  @media (max-width: 768px) {
+    .element-isolation-panel {
+      width: 100%;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      top: auto;
+      max-height: 80vh;
+      border-radius: 8px 8px 0 0;
+      z-index: 1000; /* Mayor z-index para dispositivos móviles */
+    }
+    
+    .isolation-panel-header {
+      border-radius: 8px 8px 0 0;
+    }
+  }
+  
+  /* Agregamos una animación de entrada para el panel */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .element-isolation-panel {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .virtualized-list-container {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .isolated-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .isolated-element:hover {
+    background-color: rgba(0, 120, 255, 0.1);
+  }
+  
+  .isolated-element.focused {
+    background-color: rgba(255, 204, 0, 0.15);
+    border-left: 3px solid #ffcc00;
+  }
+  
+  .element-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .element-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .element-type {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .element-id {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .focus-icon {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .isolated-element:hover .focus-icon {
+    opacity: 0.7;
+  }
+  
+  .isolated-element.focused .focus-icon {
+    opacity: 1;
+    color: #ffcc00;
+  }
+  
+  .element-loading-placeholder {
+    width: 100%;
+    padding: 8px 0;
+  }
+  
+  .loading-line {
+    height: 14px;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .loading-line:last-child {
+    width: 40%;
+    margin-bottom: 0;
+  }
+  
+  .spinner-small {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  
+  .loading-more-indicator {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 8px;
+  }
+  
+  .elements-info {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

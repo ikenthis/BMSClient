@@ -1,0 +1,30 @@
+BIMViewer/
+├── hooks/
+│   ├── useBimData.ts        # Hook para gestionar los datos BIM
+│   ├── useElementsSelection.ts  # Hook para la selección de elementos
+│   ├── useViewerActions.ts  # Hook para acciones del visor
+│   └── useViewerState.ts    # Hook para estado del visor
+├── services/
+│   ├── api.ts               # Servicios de API
+│   └── modelService.ts      # Servicio para gestión del modelo
+├── styles/
+│   ├── viewer.css           # Estilos generales
+│   └── viewer.module.css    # Estilos modulares
+├── UI/
+│   └── ViewerIcons.tsx      # Componentes de iconos
+├── utils/
+│   ├── elementSelector.ts   # Utilidad para selección de elementos
+│   ├── LocalModelLoader.css # Estilos para carga de modelos locales
+│   ├── LocalModelLoader.tsx # Componente para carga de modelos locales
+│   ├── materialManager.ts   # Gestor de materiales
+│   └── modelLoader.ts       # Cargador de modelos
+├── ViewerPanels/
+│   ├── DataPanel.tsx        # Panel de datos
+│   └── FunctionPanels.tsx   # Paneles de funciones
+├── index.tsx                # Punto de entrada del componente
+├── ViewerContainer.tsx      # Contenedor principal del visor
+├── ViewerPage.tsx           # Página completa del visor
+├── ViewerScene.tsx          # Escena 3D del visor
+├── ViewerToolbar.tsx        # Barra de herramientas del visor
+├── BimViewerContext.tsx     # Contexto para compartir estado
+└── types.ts                 # Definiciones de tipos

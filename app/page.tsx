@@ -109,7 +109,7 @@ const HomePage = () => {
                 <Link href="/dashboard">
                   <Button 
                     className="cursor-pointer bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 transition-all duration-300 rounded-md flex items-center gap-1 shadow-md hover:shadow-lg">
-                    Panel <ChevronRight className="w-4 h-4" />
+                    DashBoard <ChevronRight className="w-4 h-4" />
                   </Button>
                 </Link>
                 
@@ -209,7 +209,7 @@ const HomePage = () => {
                 transition={{ duration: 0.6 }}
                 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600 tracking-tight leading-tight"
               >
-                Sistema Inteligente de Gestión de Edificios
+                Smart Building Management System
               </motion.h1>
               
               <motion.p 
@@ -317,7 +317,7 @@ const HomePage = () => {
           </div>
           
           <div className="mt-12 pt-8 border-t border-gray-800 text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center">
-            <p>© 2025 IPCE Gestión de Edificios. Todos los derechos reservados.</p>
+            <p>© 2025 IPCE Smart Building Management System. Todos los derechos reservados.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-blue-400 transition-colors">Twitter</a>
               <a href="#" className="hover:text-blue-400 transition-colors">LinkedIn</a>

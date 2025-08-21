@@ -1,0 +1,748 @@
+/* inventorypanel.css - Modernizado */
+
+.inventory-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 320px;
+  background-color: #1a1f2e; /* Color de fondo oscuro */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border-left: 1px solid #2c3142; /* Color de borde */
+}
+
+/* Header */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #212635; /* Color de fondo para el encabezado */
+  border-bottom: 1px solid #2c3142; /* Color de borde */
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-title h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff; /* Color de texto explícito */
+}
+
+.panel-close-button {
+  background: none;
+  border: none;
+  color: #b0b6c4; /* Color de icono */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.panel-close-button:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Panel Content */
+.panel-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(26, 31, 46, 0.8); /* Color de fondo */
+  z-index: 10;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #2c3142; /* Color para el spinner */
+  border-top-color: #3b9aff; /* Color para el spinner */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 8px;
+}
+
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(59, 154, 255, 0.2); /* Color para el spinner pequeño */
+  border-top-color: #3b9aff; /* Color para el spinner pequeño */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+/* Buscador */
+.search-container {
+  padding: 12px 16px;
+  border-bottom: 1px solid #2c3142; /* Color de borde */
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #8891a7; /* Color para el icono */
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 32px 8px 34px;
+  border: 1px solid #2c3142; /* Color de borde */
+  border-radius: 4px;
+  background-color: #1e2437; /* Color de fondo */
+  color: #ffffff;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b9aff; /* Color de borde al enfocar */
+  box-shadow: 0 0 0 1px rgba(59, 154, 255, 0.3); /* Sombra al enfocar */
+}
+
+.search-clear {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #8891a7; /* Color para el icono */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.search-clear:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Controles de aislamiento */
+.isolation-controls {
+  padding: 8px 16px;
+  border-bottom: 1px solid #2c3142; /* Color de borde */
+  background-color: #212635; /* Color de fondo */
+  display: flex;
+  gap: 8px;
+}
+
+.isolation-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #2c3142; /* Color de borde */
+  border-radius: 4px;
+  background-color: #1e2437; /* Color de fondo */
+  color: #b0b6c4; /* Color de texto */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.isolation-button:hover:not(:disabled) {
+  background-color: #262c3e; /* Color de fondo al pasar el mouse */
+}
+
+.isolation-button.active {
+  background-color: rgba(59, 154, 255, 0.15); /* Color de fondo cuando está activo */
+  border-color: #3b9aff; /* Color de borde cuando está activo */
+  color: #3b9aff; /* Color de texto cuando está activo */
+}
+
+.isolation-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reset-view-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid #2c3142;
+  border-radius: 4px;
+  background-color: #1e2437;
+  color: #b0b6c4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-view-button:hover {
+  background-color: #262c3e;
+  color: #ffffff;
+}
+
+/* Panel de estado */
+.panel-status {
+  display: flex;
+  padding: 8px 16px;
+  font-size: 12px;
+  background-color: #212635; /* Color de fondo */
+  border-bottom: 1px solid #2c3142; /* Color de borde */
+  justify-content: space-between;
+  color: #8891a7; /* Color de texto */
+}
+
+.status-info {
+  font-weight: 500;
+}
+
+/* Árbol de categorías */
+.categories-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  background-color: #1a1f2e; /* Color de fondo */
+}
+
+.category-group {
+  margin-bottom: 1px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.category-header:hover {
+  background-color: #262c3e; /* Color de fondo al pasar el mouse */
+}
+
+.category-header.active {
+  background-color: rgba(59, 154, 255, 0.1); /* Color de fondo cuando está activo */
+  border-left-color: #3b9aff; /* Color de borde izquierdo cuando está activo */
+}
+
+.category-expand-icon {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8891a7; /* Color para el icono */
+}
+
+.category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.category-name-inventory {
+  flex: 1;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #ffffff; /* Aseguramos contraste */
+}
+
+.category-count {
+  font-size: 11px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1px 5px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+  margin-right: 8px;
+}
+
+.category-zoom-button {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8891a7;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-zoom-button:hover {
+  background-color: rgba(59, 154, 255, 0.15);
+  color: #3b9aff;
+}
+
+/* Subcategorías */
+.subcategories-container {
+  margin-left: 12px;
+}
+
+.subcategory-group {
+  margin-bottom: 1px;
+}
+
+.subcategory-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.subcategory-header:hover {
+  background-color: #262c3e; /* Color de fondo al pasar el mouse */
+}
+
+.subcategory-header.active {
+  background-color: rgba(59, 154, 255, 0.1); /* Color de fondo cuando está activo */
+  border-left-color: #3b9aff; /* Color de borde izquierdo cuando está activo */
+}
+
+.subcategory-expand-icon {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8891a7; /* Color para el icono */
+}
+
+.subcategory-name {
+  flex: 1;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #ffffff; /* Aseguramos contraste */
+}
+
+.subcategory-count {
+  font-size: 11px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1px 5px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Contenedor de elementos */
+.elements-container {
+  background-color: #1e2437; /* Color de fondo */
+  padding: 4px 0;
+}
+
+.no-elements {
+  padding: 16px;
+  text-align: center;
+  color: #8891a7; /* Color de texto */
+  font-size: 12px;
+  font-style: italic;
+}
+
+.virtual-list-container {
+  position: relative;
+}
+
+.loading-more {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #8891a7; /* Color de texto */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Elementos de inventario */
+.inventory-element {
+  padding: 8px 12px 8px 40px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-left: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(44, 49, 66, 0.3);
+}
+
+.inventory-element:hover {
+  background-color: #262c3e; /* Color de fondo al pasar el mouse */
+}
+
+.inventory-element.selected {
+  background-color: rgba(59, 154, 255, 0.1); /* Color de fondo cuando está seleccionado */
+  border-left-color: #3b9aff; /* Color de borde izquierdo cuando está seleccionado */
+}
+
+.element-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.element-name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: #ffffff;
+  margin-bottom: 3px;
+}
+
+.element-type {
+  font-size: 11px;
+  color: #8891a7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.element-id {
+  font-size: 10px;
+  color: #6e768b;
+}
+
+.element-dimensions {
+  font-size: 10px;
+  color: #6e768b;
+  margin-top: 3px;
+  background-color: rgba(59, 154, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 3px;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Estilos para los botones de acción en elementos */
+.element-actions {
+  display: flex;
+  gap: 5px;
+  margin-left: auto;
+}
+
+.element-action-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.element-action-button span {
+  display: none;
+}
+
+/* Mostrar texto solo en hover */
+.element-action-button:hover span {
+  display: inline-block;
+}
+
+.info-button {
+  background-color: #4dabf5;
+  color: white;
+}
+
+.info-button:hover {
+  background-color: #3a8cd4;
+}
+
+.zoom-button {
+  background-color: #f59f00;
+  color: white;
+}
+
+.zoom-button:hover {
+  background-color: #d48a00;
+}
+
+/* Placeholder para elementos en carga */
+.inventory-element.loading {
+  cursor: default;
+}
+
+.inventory-element.loading:hover {
+  background-color: transparent;
+}
+
+.element-loading-placeholder {
+  width: 100%;
+  padding: 4px 0;
+}
+
+.loading-line {
+  height: 12px;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin-bottom: 6px;
+}
+
+.loading-line:last-child {
+  width: 40%;
+  margin-bottom: 0;
+}
+
+/* Custom Scrollbar Styling */
+.inventory-panel ::-webkit-scrollbar,
+.elements-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.inventory-panel ::-webkit-scrollbar-track,
+.elements-container::-webkit-scrollbar-track {
+  background: #1e2437; /* Color de fondo para la pista del scrollbar */
+  border-radius: 4px;
+}
+
+.inventory-panel ::-webkit-scrollbar-thumb,
+.elements-container::-webkit-scrollbar-thumb {
+  background-color: #3b9aff; /* Color para el thumb del scrollbar */
+  border-radius: 4px;
+  border: 2px solid #1e2437; /* Borde para el thumb del scrollbar */
+}
+
+.inventory-panel ::-webkit-scrollbar-thumb:hover,
+.elements-container::-webkit-scrollbar-thumb:hover {
+  background: #3b9aff; /* Color para el thumb del scrollbar al pasar el mouse */
+}
+
+/* Animación de entrada */
+@keyframes slideIn {
+  from {
+      opacity: 0;
+      transform: translateX(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+.inventory-panel {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Estilos para elementos en foco especial */
+.inventory-element.focused {
+  background-color: rgba(59, 154, 255, 0.15);
+  border-left: 3px solid #3b9aff;
+}
+
+/* Para cuando se usa una lista virtualizada */
+.virtualized-list-container {
+  border: 1px solid #2c3142;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Asegurarse que el panel aparezca siempre a la derecha */
+@media screen and (max-width: 768px) {
+  .inventory-panel {
+      width: 280px; /* Un poco más estrecho en pantallas pequeñas */
+  }
+}
+
+/* Estado colapsado del panel */
+.inventory-panel.collapsed {
+  transform: translateX(100%);
+}
+
+/* Estilo para cuando se muestra la información detallada */
+.element-detail-panel {
+  position: absolute;
+  top: 0;
+  right: 320px; /* Al lado del panel principal */
+  height: 100%;
+  width: 350px;
+  background-color: #1a1f2e;
+  border-left: 1px solid #2c3142;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.4);
+  z-index: 99;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  color: #ffffff;
+  padding: 16px;
+}
+
+.element-detail-panel h3 {
+  border-bottom: 1px solid #2c3142;
+  padding-bottom: 8px;
+  margin-top: 0;
+}
+
+.detail-section {
+  margin-bottom: 16px;
+}
+
+.detail-section h4 {
+  font-size: 14px;
+  color: #3b9aff;
+  margin-bottom: 8px;
+}
+
+.property-row {
+  display: flex;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(44, 49, 66, 0.5);
+}
+
+.property-name {
+  flex: 0 0 40%;
+  font-size: 12px;
+  color: #8891a7;
+}
+
+.property-value {
+  flex: 0 0 60%;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+/* Botón flotante para mostrar/ocultar el panel en dispositivos móviles */
+.toggle-panel-button {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #3b9aff;
+  color: white;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 101;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .toggle-panel-button {
+      display: flex;
+  }
+  
+  .inventory-panel {
+      transform: translateX(100%);
+  }
+  
+  .inventory-panel.visible {
+      transform: translateX(0);
+  }
+}
+
+/* Estos estilos deben añadirse a tu archivo inventorypanel.css */
+
+/* Estilos para elementos bloqueados */
+.inventory-element.selection-locked {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.inventory-element.selection-locked:not(.selected) {
+  pointer-events: none;
+}
+
+.inventory-element.selected.selection-locked {
+  border-left: 4px solid #f59f00;
+  background-color: rgba(245, 159, 0, 0.1);
+}
+
+/* Indicador de bloqueo en elemento seleccionado */
+.element-locked-indicator {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #f59f00;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  z-index: 5;
+}
+
+/* Botón para desbloquear selección */
+.unlock-selection-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #f59f00;
+  border: 1px solid #f59f00;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unlock-selection-button:hover {
+  background-color: rgba(245, 159, 0, 0.3);
+}
+
+.lock-indicator {
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+}

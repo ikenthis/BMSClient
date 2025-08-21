@@ -1,0 +1,363 @@
+/* src/components/styles/compact-toolbar.css */
+
+/* Estilos base para el toolbar compacto */
+.compact-toolbar {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estados de expansión */
+.compact-toolbar.collapsed {
+  transform: translateX(-50%) scale(0.95);
+}
+
+.compact-toolbar.expanded {
+  transform: translateX(-50%) scale(1);
+}
+
+.compact-toolbar.minimized {
+  transform: translateX(-50%) scale(0.9);
+}
+
+/* Contenedor principal */
+.toolbar-container {
+  background: rgba(31, 41, 55, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(75, 85, 99, 0.6);
+  border-radius: 0.75rem;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.3),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.toolbar-container:hover {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones compactos */
+.compact-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  min-width: 2rem;
+  min-height: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estados de botones */
+.compact-button.enabled {
+  background: rgba(75, 85, 99, 0.8);
+  color: rgb(229, 231, 235);
+  cursor: pointer;
+}
+
+.compact-button.enabled:hover {
+  background: rgba(107, 114, 128, 1);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.compact-button.disabled {
+  background: rgba(75, 85, 99, 0.3);
+  color: rgb(107, 114, 128);
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.compact-button.home {
+  background: rgb(37, 99, 235);
+  color: white;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+.compact-button.home:hover {
+  background: rgb(29, 78, 216);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.4);
+}
+
+.compact-button.heatmap-active {
+  background: linear-gradient(135deg, rgb(168, 85, 247), rgb(236, 72, 153));
+  color: white;
+  box-shadow: 0 4px 8px rgba(168, 85, 247, 0.3);
+}
+
+.compact-button.heatmap-active:hover {
+  background: linear-gradient(135deg, rgb(147, 51, 234), rgb(219, 39, 119));
+  box-shadow: 0 6px 12px rgba(168, 85, 247, 0.4);
+}
+
+/* Tooltips */
+.compact-button .tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgb(17, 24, 39);
+  color: white;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 50;
+}
+
+.compact-button:hover .tooltip {
+  opacity: 1;
+}
+
+/* Separadores */
+.toolbar-separator {
+  width: 1px;
+  height: 1.5rem;
+  background: rgba(75, 85, 99, 0.6);
+  margin: 0 0.25rem;
+}
+
+/* Indicadores de estado */
+.status-indicator {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgb(34, 197, 94);
+  border: 1px solid rgb(31, 41, 55);
+}
+
+.status-indicator.warning {
+  background: rgb(245, 158, 11);
+}
+
+.status-indicator.error {
+  background: rgb(239, 68, 68);
+}
+
+.status-indicator.active {
+  background: rgb(168, 85, 247);
+  animation: pulse-glow 2s infinite;
+}
+
+/* Animaciones */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.expand-button {
+  background: rgba(75, 85, 99, 1);
+  color: rgb(229, 231, 235);
+  border-radius: 0.375rem;
+  padding: 0.375rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.expand-button:hover {
+  background: rgba(107, 114, 128, 1);
+  color: white;
+}
+
+/* Header del toolbar expandido */
+.toolbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.toolbar-title {
+  font-size: 0.75rem;
+  color: rgb(156, 163, 175);
+  font-weight: 500;
+}
+
+.toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.control-button {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  color: rgb(156, 163, 175);
+  cursor: pointer;
+}
+
+.control-button:hover {
+  background: rgba(75, 85, 99, 1);
+  color: white;
+}
+
+.control-button.auto-collapse-active {
+  color: rgb(34, 197, 94);
+}
+
+/* Grupos de botones */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.button-groups-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Información de estado */
+.status-info {
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(75, 85, 99, 0.6);
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.status-label {
+  color: rgb(156, 163, 175);
+}
+
+.status-items {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-item {
+  color: rgb(229, 231, 235);
+}
+
+.status-item.active {
+  color: rgb(168, 85, 247);
+  font-weight: 500;
+}
+
+.status-item.success {
+  color: rgb(34, 197, 94);
+}
+
+/* Hint para hover */
+.hover-hint {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(4px);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: rgb(156, 163, 175);
+  border: 1px solid rgba(75, 85, 99, 0.6);
+  white-space: nowrap;
+  z-index: 30;
+}
+
+/* Botón minimizado */
+.minimized-button {
+  background: rgba(31, 41, 55, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(75, 85, 99, 0.6);
+  border-radius: 50%;
+  padding: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.minimized-button:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .compact-toolbar {
+    bottom: 0.5rem;
+  }
+  
+  .toolbar-container {
+    border-radius: 0.5rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .button-groups-container {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .compact-button {
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    padding: 0.25rem;
+  }
+}
+
+/* Mejoras de accesibilidad */
+.compact-button:focus {
+  outline: 2px solid rgb(37, 99, 235);
+  outline-offset: 2px;
+}
+
+.control-button:focus {
+  outline: 1px solid rgb(37, 99, 235);
+  outline-offset: 1px;
+}
+
+/* Transiciones suaves para cambios de estado */
+.toolbar-container * {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estados de loading */
+.compact-button.loading {
+  pointer-events: none;
+}
+
+.compact-button.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

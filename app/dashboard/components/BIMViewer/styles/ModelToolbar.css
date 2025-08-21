@@ -1,0 +1,240 @@
+/* ModelToolbar.css */
+
+.model-toolbar-container {
+  max-width: 700px; /* Aumentado de 550px a 700px para hacerla más ancha */
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  /* Posicionamiento ajustado */
+  position: absolute;
+  bottom: 15px;
+  left: 38%;
+  transform: translateX(-50%);
+  z-index: 9999; /* Aumentado para garantizar que esté por encima de otros elementos */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  backdrop-filter: blur(5px);
+  /* Aseguramos que no interfiera con otros elementos */
+  pointer-events: auto;
+}
+
+.toolbar-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: height 0.3s ease, opacity 0.2s ease;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/* Estilos específicos cuando la barra está colapsada */
+.model-toolbar-container.collapsed {
+  bottom: 0; /* Se pega al borde inferior cuando está colapsada */
+}
+
+.model-toolbar-container.collapsed .toolbar-content {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.model-toolbar-container.collapsed .collapse-button {
+  border-radius: 6px 6px 0 0;
+  bottom: 0;
+  top: auto;
+}
+
+/* Botón de colapsar */
+.collapse-button {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0f172a; /* Color igual al toolbar principal */
+  border: none;
+  color: white;
+  width: 40px;
+  height: 28px;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 101;
+  transition: background-color 0.2s ease, top 0.3s ease;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
+}
+
+/* Posición fija en la parte inferior cuando está colapsada */
+.model-toolbar-container.collapsed .collapse-button {
+  top: -28px; /* Mantiene la posición relativa */
+}
+
+.collapse-button:hover {
+  background-color: #06b6d4; /* Color celeste para hover */
+}
+
+.collapse-button .rotate-icon {
+  transform: rotate(180deg);
+}
+
+.main-toolbar {
+  display: flex;
+  background-color: #0f172a;
+  border-radius: 6px 6px 0 0;
+  padding: 8px 16px; /* Aumentado el padding para dar más espacio interno */
+  color: white;
+  justify-content: space-between; /* Mejor distribución de los botones */
+}
+
+.toolbar-section {
+  padding: 0 6px; /* Aumentado el padding */
+  border-right: 1px solid #1e293b; /* Color de borde más visible */
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-section:last-child {
+  border-right: none;
+}
+
+.toolbar-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px; /* Aumentado el padding */
+  font-size: 12px;
+  border-radius: 4px;
+  margin: 0 3px; /* Más espacio entre botones */
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-button span {
+  margin-left: 4px;
+}
+
+.toolbar-button:hover {
+  background-color: #333;
+}
+
+/* Botón activo - definido con !important para asegurar que se aplique */
+.toolbar-button.active-button {
+  background-color: #06b6d4 !important; /* Color celeste agua para botones activos */
+  color: white !important;
+}
+
+/* Mismo estilo para los botones activos en ambas barras */
+.active-button {
+  background-color: #06b6d4 !important; /* Color celeste agua para botones activos */
+  color: white !important;
+}
+
+/* Modo compacto para pantallas pequeñas */
+@media (max-width: 600px) {
+  .toolbar-button span {
+    display: none;
+  }
+}
+
+.secondary-toolbar {
+  display: flex;
+  background-color: #0f172a; /* Mismo color que la barra principal */
+  border-radius: 0 0 6px 6px;
+  padding: 8px 16px; /* Aumentado el padding */
+  color: white;
+  justify-content: space-between; /* Mejor distribución de los botones */
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px; /* Aumentado el padding */
+  font-size: 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  margin: 0 3px; /* Más espacio entre botones */
+  transition: background-color 0.2s ease;
+}
+
+.icon-button svg {
+  margin-right: 6px; /* Más espacio entre icono y texto */
+}
+
+.icon-button .button-text {
+  white-space: nowrap;
+}
+
+/* Modo compacto para pantallas pequeñas */
+@media (max-width: 600px) {
+  .icon-button .button-text {
+    display: none;
+  }
+  
+  .icon-button svg {
+    margin-right: 0;
+  }
+}
+
+.icon-button:hover {
+  background-color: #333;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .model-toolbar-container {
+    max-width: 90%;
+  }
+  
+  .main-toolbar, .secondary-toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .toolbar-section {
+    padding: 2px;
+    border-right: none;
+    margin-bottom: 2px;
+  }
+  
+  .icon-button {
+    font-size: 11px;
+  }
+  
+  .icon-button svg {
+    margin-right: 3px;
+  }
+  
+  /* Ajuste para el botón de colapso en móvil */
+  .collapse-button {
+    width: 32px;
+    height: 22px;
+    top: -22px;
+  }
+}
+
+/* Animation for toolbar appearance */
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.model-toolbar-container {
+  animation: slideUp 0.3s ease forwards;
+}

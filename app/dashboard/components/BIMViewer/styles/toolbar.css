@@ -1,0 +1,1186 @@
+/* Estilos para ViewerToolbar */
+
+.viewer-interface {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+  }
+  
+  /* Estilos para la barra de herramientas */
+  .viewer-toolbar {
+    position: absolute;
+    top: 20px;
+    right: 100px; /* Posicionado a 100px de la derecha */
+    display: flex;
+    flex-direction: column;
+    padding: 8px 6px;
+    background-color: rgba(17, 24, 39, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    border: 1px solid rgba(55, 65, 81, 0.5);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 110;
+  }
+  
+  /* Contenedor de botones de herramientas */
+  .toolbar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  /* Botones individuales de herramientas */
+  .toolbar-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background-color: rgba(31, 41, 55, 0.7);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.2s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .toolbar-button:hover {
+    background-color: rgba(55, 65, 81, 0.8);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  .toolbar-button.active {
+    background-color: rgba(59, 130, 246, 0.5);
+    border-color: rgba(59, 130, 246, 0.7);
+    color: white;
+  }
+  
+  /* Tooltips para botones */
+  .tooltip {
+    position: absolute;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(15, 23, 42, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+  }
+  
+  .toolbar-button:hover .tooltip {
+    opacity: 1;
+  }
+  
+  /* Panel de herramientas */
+  .toolbar-panel {
+    position: absolute;
+    top: 20px;
+    right: 150px; /* Posicionado a la izquierda de la barra de herramientas */
+    width: 240px;
+    background-color: rgba(17, 24, 39, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 1px solid rgba(55, 65, 81, 0.5);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 40px);
+    animation: slideIn 0.25s ease-out;
+    z-index: 100;
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  /* Encabezado del panel */
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+  }
+  
+  .panel-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .close-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Contenido del panel con scroll */
+  .panel-content {
+    padding: 12px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(55, 65, 81, 0.5) transparent;
+    flex: 1;
+  }
+  
+  .panel-content::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .panel-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .panel-content::-webkit-scrollbar-thumb {
+    background-color: rgba(55, 65, 81, 0.5);
+    border-radius: 3px;
+  }
+  
+  /* Subtítulos para paneles */
+  .panel-subtitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(156, 163, 175, 0.9);
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+  }
+  
+  /* Estilo para el campo de búsqueda */
+  .search-box {
+    position: relative;
+    margin-bottom: 12px;
+  }
+  
+  .search-box input {
+    width: 100%;
+    padding: 8px 10px 8px 30px;
+    background-color: rgba(31, 41, 55, 0.7);
+    border: 1px solid rgba(75, 85, 99, 0.4);
+    border-radius: 5px;
+    color: white;
+    font-size: 13px;
+  }
+  
+  .search-box input:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.7);
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(156, 163, 175, 0.7);
+    pointer-events: none;
+  }
+  
+  /* Estilos para las capas */
+  .layer-list {
+    margin-bottom: 10px;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+  }
+  
+  .layer-item {
+    display: flex;
+    align-items: center;
+    padding: 7px 5px;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .layer-item:hover {
+    background-color: rgba(55, 65, 81, 0.5);
+  }
+  
+  .layer-item input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  
+  .layer-item label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  /* Opciones de visibilidad */
+  .visibility-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+  }
+  
+  .visibility-option {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .visibility-option:hover {
+    background-color: rgba(55, 65, 81, 0.5);
+  }
+  
+  .visibility-option input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  
+  .visibility-option label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  /* Acciones del panel */
+  .panel-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  
+  .panel-action-button {
+    flex: 1;
+    padding: 7px 0;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: rgba(59, 130, 246, 0.2);
+    color: rgb(96, 165, 250);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+  
+  .panel-action-button:hover {
+    background-color: rgba(59, 130, 246, 0.3);
+  }
+  
+  .panel-action-button.secondary {
+    background-color: rgba(100, 116, 139, 0.2);
+    color: rgba(203, 213, 225, 0.9);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+  }
+  
+  .panel-action-button.secondary:hover {
+    background-color: rgba(100, 116, 139, 0.3);
+  }
+  
+  /* Mensaje de propiedades */
+  .properties-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+  }
+  
+  .properties-message {
+    color: rgba(156, 163, 175, 0.9);
+    font-size: 13px;
+    text-align: center;
+    font-style: italic;
+  }
+  
+  /* Grid de elementos para añadir */
+  .elements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .element-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(31, 41, 55, 0.5);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  
+  .element-item:hover {
+    background-color: rgba(31, 41, 55, 0.7);
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+  
+  .element-icon {
+    color: rgba(156, 163, 175, 0.9);
+    margin-bottom: 5px;
+  }
+  
+  .element-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+  }
+  
+  .add-element-button {
+    padding: 4px 8px;
+    background-color: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: rgb(96, 165, 250);
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .add-element-button:hover {
+    background-color: rgba(59, 130, 246, 0.3);
+  }
+  
+  /* Formulario de propiedades del elemento */
+  .element-properties-form {
+    margin-top: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    color: rgba(156, 163, 175, 0.9);
+    margin-bottom: 4px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 6px 8px;
+    background-color: rgba(31, 41, 55, 0.7);
+    border: 1px solid rgba(75, 85, 99, 0.4);
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+  }
+  
+  .position-inputs {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .position-inputs input {
+    flex: 1;
+  }
+  
+  /* Tabs para información de datos */
+  .data-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+    margin-bottom: 12px;
+  }
+  
+  .data-tab {
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: rgba(156, 163, 175, 0.9);
+    font-size: 13px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .data-tab.active {
+    color: rgb(96, 165, 250);
+  }
+  
+  .data-tab.active:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(59, 130, 246);
+  }
+  
+  /* Estilos para PropertySets */
+  .property-set-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .property-set-item {
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .property-set-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: rgba(31, 41, 55, 0.7);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .property-set-header:hover {
+    background-color: rgba(55, 65, 81, 0.8);
+  }
+  
+  .property-set-content {
+    padding: 8px 10px;
+    background-color: rgba(31, 41, 55, 0.4);
+    font-size: 12px;
+  }
+  
+  .property-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .property-table tr {
+    border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+  }
+  
+  .property-table tr:last-child {
+    border-bottom: none;
+  }
+  
+  .property-table td {
+    padding: 6px 4px;
+  }
+  
+  .property-table td:first-child {
+    color: rgba(156, 163, 175, 0.9);
+    width: 40%;
+  }
+  
+  .property-table td:last-child {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Estilos para atributos */
+  .attributes-panel {
+    display: none; /* Se muestra solo cuando la pestaña Atributos está activa */
+  }
+  
+  .attribute-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+  }
+  
+  .attribute-name {
+    color: rgba(156, 163, 175, 0.9);
+    font-size: 12px;
+  }
+  
+  .attribute-value {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+  }
+  
+  /* Estilos para acciones flotantes */
+  .floating-actions {
+    position: absolute;
+    bottom: 20px;
+    right: 100px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .floating-action-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: rgba(59, 130, 246, 0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+  }
+  
+  .floating-action-button:hover {
+    transform: translateY(-2px);
+    background-color: rgba(59, 130, 246, 0.9);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Estilos para el panel de capas por especialidad */
+.toolbar-panel {
+  background-color: #1a202c;
+  color: #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 280px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #2d3748;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.close-button:hover {
+  color: #e2e8f0;
+  background-color: #2d3748;
+}
+
+.panel-content {
+  padding: 16px;
+}
+
+.panel-description p {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #a0aec0;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  background-color: #2d3748;
+  border: 1px solid #4a5568;
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #718096;
+}
+
+.search-box .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+}
+
+.layer-list {
+  margin-bottom: 20px;
+}
+
+.layer-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #2d3748;
+}
+
+.layer-item:last-child {
+  border-bottom: none;
+}
+
+.layer-item input[type="checkbox"] {
+  margin-right: 10px;
+  height: 18px;
+  width: 18px;
+  accent-color: #4299e1;
+}
+
+.layer-item label {
+  flex-grow: 1;
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+.layer-badge {
+  color: #718096;
+  cursor: help;
+}
+
+.layer-legend {
+  background-color: #2d3748;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.layer-legend h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #a0aec0;
+}
+
+.legend-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-category {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.legend-category strong {
+  color: #a0aec0;
+}
+
+.legend-category span {
+  color: #718096;
+  font-size: 12px;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.panel-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+}
+
+.panel-action-button:hover {
+  background-color: #2b6cb0;
+}
+
+.panel-action-button:disabled {
+  background-color: #4a5568;
+  cursor: not-allowed;
+}
+
+.panel-action-button.secondary {
+  background-color: #4a5568;
+}
+
+.panel-action-button.secondary:hover {
+  background-color: #2d3748;
+}
+
+.panel-action-button.secondary:disabled {
+  background-color: #2d3748;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.loading-indicator .spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4a5568;
+  border-top: 2px solid #4299e1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.floorplans-panel {
+  padding: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.floorplans-actions {
+  margin-bottom: 16px;
+}
+
+.generate-section,
+.loading-section,
+.plans-management {
+  padding: 12px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  background-color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #60a5fa;
+}
+
+.loading-indicator .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-description {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.plans-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+}
+
+.current-plan-indicator {
+  color: #60a5fa;
+  font-weight: 500;
+}
+
+.plans-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.error-section {
+  margin-bottom: 16px;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: #7f1d1d;
+  border: 1px solid #dc2626;
+  border-radius: 4px;
+  color: #fecaca;
+  font-size: 0.875rem;
+}
+
+.error-close-button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #fecaca;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-close-button:hover {
+  color: #ffffff;
+}
+
+.plans-list h4 {
+  margin-bottom: 12px;
+  color: #e5e7eb;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.plans-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.plan-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  background-color: #1f2937;
+  transition: all 0.2s ease;
+}
+
+.plan-item:hover {
+  border-color: #60a5fa;
+  background-color: #1e3a8a;
+}
+
+.plan-item.active {
+  border-color: #60a5fa;
+  background-color: #1e40af;
+}
+
+.plan-info {
+  flex: 1;
+}
+
+.plan-name {
+  margin: 0 0 4px 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.plan-level,
+.plan-elevation {
+  display: block;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 2px;
+}
+
+.plan-actions {
+  margin-left: 12px;
+}
+
+.plan-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  background-color: #374151;
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.plan-button:hover {
+  border-color: #60a5fa;
+  background-color: #1e40af;
+}
+
+.plan-button.active-button {
+  border-color: #dc2626;
+  background-color: #7f1d1d;
+  color: #fecaca;
+}
+
+.plan-button.active-button:hover {
+  border-color: #ef4444;
+  background-color: #991b1b;
+}
+
+.active-view-controls {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid #059669;
+  border-radius: 6px;
+  background-color: #064e3b;
+}
+
+.active-view-controls h4 {
+  margin: 0 0 8px 0;
+  color: #6ee7b7;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.view-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.view-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #6ee7b7;
+}
+
+.view-description {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  line-height: 1.4;
+}
+
+.floorplans-info {
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  background-color: #111827;
+}
+
+.floorplans-info h4 {
+  margin: 0 0 8px 0;
+  color: #e5e7eb;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.info-content p {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.info-features {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-feature {
+  font-size: 0.7rem;
+  color: #6b7280;
+  line-height: 1.3;
+}
+
+.info-feature strong {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+/* Botones del panel FloorPlans */
+.primary-button {
+  background-color: #1e40af !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+.primary-button:hover {
+  background-color: #1d4ed8 !important;
+  border-color: #3b82f6 !important;
+}
+
+.secondary-button {
+  background-color: #374151 !important;
+  border-color: #4b5563 !important;
+  color: #e5e7eb !important;
+}
+
+.secondary-button:hover {
+  background-color: #4b5563 !important;
+  border-color: #6b7280 !important;
+}
+
+.warning-button {
+  background-color: #7f1d1d !important;
+  border-color: #dc2626 !important;
+  color: #fecaca !important;
+}
+
+.warning-button:hover {
+  background-color: #991b1b !important;
+  border-color: #ef4444 !important;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .floorplans-panel {
+    padding: 12px;
+    max-height: 60vh;
+  }
+  
+  .plan-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .plan-actions {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .plan-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .plans-actions {
+    flex-direction: column;
+  }
+  
+  .view-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* Animaciones adicionales */
+.plan-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estados de carga específicos para FloorPlans */
+.floorplans-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.floorplans-loading .spinner {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 16px;
+}
+
+/* Indicadores de estado visual */
+.plan-item .status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.plan-item .status-indicator.generated {
+  background-color: #10b981;
+}
+
+.plan-item .status-indicator.active {
+  background-color: #3b82f6;
+  animation: pulse 2s infinite;
+}
+
+.plan-item .status-indicator.error {
+  background-color: #ef4444;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Mejoras para accesibilidad */
+.plan-button:focus,
+.error-close-button:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+.plan-item:focus-within {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+/* Transiciones suaves para cambios de estado */
+.floorplans-panel * {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Estilos para el tooltip del botón FloorPlans en el toolbar */
+.toolbar-button .tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1f2937;
+  color: #e5e7eb;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+  margin-bottom: 8px;
+}
+
+.toolbar-button:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}

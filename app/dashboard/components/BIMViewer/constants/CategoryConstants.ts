@@ -1,0 +1,22 @@
+export const CATEGORY_DISPLAY_NAMES: { [key: string]: string } = {
+  "IFCWALL": "Muros",
+  "IFCSLAB": "Suelos/Losas",
+  "IFCBEAM": "Vigas",
+  "IFCCOLUMN": "Columnas/Pilares",
+  "IFCDOOR": "Puertas",
+  "IFCWINDOW": "Ventanas",
+  "IFCROOF": "Techos",
+  "IFCSTAIR": "Escaleras",
+  "IFCRAILING": "Barandillas",
+  "IFCFURNISHINGELEMENT": "Mobiliario",
+  "IFCCURTAINWALL": "Muros Cortina",
+  "IFCPLATE": "Placas",
+  "IFCMEMBER": "Elementos Estructurales",
+  "IFCBUILDINGELEMENTPROXY": "Elementos Genéricos",
+  "IFCFLOWFITTING": "Conexiones MEP",
+  "IFCFLOWSEGMENT": "Conductos/Tuberías",
+  "IFCFLOWTERMINAL": "Terminales MEP",
+  "IFCBUILDING": "Edificio",
+  "IFCSPACE": "Espacios",
+  "IFCSITE": "Terreno"
+};

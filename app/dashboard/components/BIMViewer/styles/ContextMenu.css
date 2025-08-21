@@ -1,0 +1,86 @@
+/* ContextMenu.css */
+
+.bim-context-menu {
+    position: absolute;
+    z-index: 1100;
+    min-width: 180px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    animation: menuFadeIn 0.15s ease-out;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    user-select: none;
+  }
+  
+  @keyframes menuFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .context-menu-header {
+    padding: 8px 12px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #eeeeee;
+  }
+  
+  .element-id {
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .context-menu-content {
+    padding: 4px 0;
+  }
+  
+  .context-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 12px;
+    text-align: left;
+    border: none;
+    background: none;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+  
+  .context-menu-item:hover {
+    background-color: #f0f8ff;
+  }
+  
+  .context-menu-item:active {
+    background-color: #e6f0ff;
+  }
+  
+  .context-menu-item svg {
+    color: #555;
+  }
+  
+  .context-menu-item:hover svg {
+    color: #2979ff;
+  }
+  
+  .context-menu-divider {
+    height: 1px;
+    background-color: #eeeeee;
+    margin: 4px 0;
+  }
+  
+  /* Animación para el elemento destacado */
+  .highlighted-element {
+    animation: highlight 2s ease-in-out;
+  }
+  
+  @keyframes highlight {
+    0% { outline: 0px solid rgba(41, 121, 255, 0); }
+    25% { outline: 5px solid rgba(41, 121, 255, 0.5); }
+    75% { outline: 5px solid rgba(41, 121, 255, 0.5); }
+    100% { outline: 0px solid rgba(41, 121, 255, 0); }
+  }
+
+  
